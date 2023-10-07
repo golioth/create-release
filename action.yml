@@ -1,0 +1,22 @@
+name: "Create Golioth Release"
+description: "Create a release in the Golioth Cloud."
+branding:
+  icon: "cpu"
+  color: "green"
+
+inputs:
+  artifact:
+    description: "Artifact to use for release."
+    required: true
+  version:
+    description: "Artifact version to use for release."
+    required: true
+  deviceTag:
+    description: Tag used to target a release.
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - run: goliothctl dfu release create --components ${{ inputs.artifact }}@${{ inputs.version }} --tags ${{ inputs.deviceTag }}
+      shell: bash
