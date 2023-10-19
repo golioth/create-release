@@ -5,18 +5,18 @@ branding:
   color: "green"
 
 inputs:
-  artifact:
+  releaseArtifact:
     description: "Artifact to use for release."
     required: true
-  version:
+  releaseArtifactVersion:
     description: "Artifact version to use for release."
     required: true
   deviceTag:
-    description: Tag used to target a release.
-    required: true
+    description: "Device tag used to restrict a release."
+    required: false
 
 runs:
   using: "composite"
   steps:
-    - run: goliothctl dfu release create --components ${{ inputs.artifact }}@${{ inputs.version }} --tags ${{ inputs.deviceTag }}
+    - run: goliothctl dfu release create --components ${{ inputs.releaseArtifact }}@${{ inputs.releaseArtifactVersion }} --tags ${{ inputs.deviceTag }}
       shell: bash
